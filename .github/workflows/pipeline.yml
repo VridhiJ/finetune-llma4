@@ -32,6 +32,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true  # Force use of Node20
         run: |
           aws ec2 start-instances --instance-ids i-038696760b61cb214
           ssh -i "key1.pem" ec2-user@your-ec2-public-dns "papermill scripts/finetune.ipynb output_notebook.ipynb"
