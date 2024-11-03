@@ -1,4 +1,5 @@
+torch
 transformers
 datasets
-torch
-deepspeed
+nbconvert
+papermill
