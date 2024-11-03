@@ -1,0 +1,37 @@
+name: Llama4 Fine-Tuning Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+  fine_tune:
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Start AWS Training
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws ec2 start-instances --instance-ids i-038696760b61cb214
+          ssh -i "key1.pem" ec2-user@your-ec2-public-dns "python scripts/fine_tune_model.py"
