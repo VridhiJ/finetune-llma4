@@ -34,4 +34,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           aws ec2 start-instances --instance-ids i-038696760b61cb214
-          ssh -i "key1.pem" ec2-user@your-ec2-public-dns "python scripts/fine_tune_model.py"
+          ssh -i "key1.pem" ec2-user@your-ec2-public-dns "papermill scripts/finetune.ipynb output_notebook.ipynb"
