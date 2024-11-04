@@ -35,4 +35,4 @@ jobs:
           FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true  # Force use of Node20
         run: |
           aws ec2 start-instances --instance-ids i-076be0003c4cf23d1 --region us-east-1
-          ssh -i "key.pem" ec2-user@your-ec2-public-dns "papermill scripts/finetune.ipynb output_notebook.ipynb"
+          ssh -i "/Users/vridhi/Downloads/key.pem" ec2-user@your-ec2-public-dns "papermill scripts/finetune.ipynb output_notebook.ipynb"
